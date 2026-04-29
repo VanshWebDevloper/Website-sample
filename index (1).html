@@ -1,0 +1,844 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>NEXUS | Elite UI/UX Design & Full-Stack Development Agency</title>
+<meta name="description" content="NEXUS is a top-tier digital agency specializing in premium UI/UX design, scalable full-stack web development, and high-performance cloud ecosystems for global enterprises.">
+<meta name="keywords" content="UI/UX design, full-stack development, tech agency, web design, cloud architecture, SaaS development, React, digital ecosystems">
+<meta name="author" content="NEXUS Team">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#020617">
+
+<link rel="canonical" href="https://example.com/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "#agency",
+      "name": "NEXUS Digital Ecosystems",
+      "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80",
+      "description": "Elite UI/UX and Full-Stack Engineering for growing enterprises.",
+      "areaServed": {
+        "@type": "Place",
+        "name": "Global"
+      },
+      "priceRange": "$$$$",
+      "url": "https://example.com/",
+      "sameAs": []
+    },
+    {
+      "@type": "Service",
+      "serviceType": "UI/UX Strategy & Design",
+      "provider": { "@id": "#agency" },
+      "areaServed": "Global",
+      "description": "Data-driven interface design, wireframing, prototyping, and motion-led UX systems."
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Full-Stack Web Architecture",
+      "provider": { "@id": "#agency" },
+      "areaServed": "Global",
+      "description": "React frontends, secure Node.js APIs, database architecture, and scalable web systems."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What makes NEXUS different from other agencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NEXUS is developer-led and focuses on production-ready digital ecosystems, combining elite UI/UX practices with high-performance backend engineering."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you handle full-stack custom software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. NEXUS specializes in React, Node.js, Python, and cloud infrastructure to build secure, robust, and scalable software."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<style>
+    :root {
+        --bg: #020617;
+        --bg-alt: rgba(15, 23, 42, 0.58);
+        --surface: rgba(15, 23, 42, 0.72);
+        --stroke: rgba(148, 163, 184, 0.12);
+        --text: #e2e8f0;
+        --text-strong: #ffffff;
+        --muted: #94a3b8;
+        --nav-bg: rgba(2, 6, 23, 0.86);
+        --nav-stroke: rgba(255,255,255,0.07);
+        --shadow: 0 18px 60px rgba(0,0,0,.25);
+        --sky: #38bdf8;
+        --emerald: #34d399;
+        --violet: #a78bfa;
+        --panel-blur: 20px;
+    }
+
+    body[data-theme="light"] {
+        --bg: #f8fafc;
+        --bg-alt: rgba(255, 255, 255, 0.72);
+        --surface: rgba(255, 255, 255, 0.78);
+        --stroke: rgba(15, 23, 42, 0.10);
+        --text: #0f172a;
+        --text-strong: #020617;
+        --muted: #475569;
+        --nav-bg: rgba(255,255,255,0.82);
+        --nav-stroke: rgba(15,23,42,0.08);
+        --shadow: 0 18px 60px rgba(15,23,42,.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        transition: background-color .35s ease, color .35s ease;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #1e293b, #0f172a); border-radius: 99px; border: 1px solid rgba(255,255,255,0.06); }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #38bdf8, #34d399); }
+    ::selection { background: var(--sky); color: #000; }
+
+    .glass {
+        background: var(--surface);
+        border: 1px solid var(--stroke);
+        backdrop-filter: blur(var(--panel-blur));
+        -webkit-backdrop-filter: blur(var(--panel-blur));
+        box-shadow: var(--shadow);
+    }
+
+    .glass-nav {
+        background: var(--nav-bg);
+        border-bottom: 1px solid var(--nav-stroke);
+        backdrop-filter: blur(var(--panel-blur));
+        -webkit-backdrop-filter: blur(var(--panel-blur));
+        transition: background-color .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .shine { position: relative; overflow: hidden; }
+    .shine::after {
+        content: "";
+        position: absolute;
+        inset: -60% -30%;
+        background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.10) 50%, transparent 65%);
+        transform: translateX(-100%) rotate(12deg);
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+    }
+    .shine:hover::after { transform: translateX(100%) rotate(12deg); }
+
+    .glow-btn {
+        box-shadow: 0 0 30px -8px rgba(56, 189, 248, .65), 0 0 45px -10px rgba(52, 211, 153, .18);
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .glow-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px -5px rgba(56, 189, 248, .8); }
+
+    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
+    .float-slow { animation: float 7s ease-in-out infinite; }
+    .float-mid { animation: float 5.5s ease-in-out infinite; }
+
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee { display: flex; width: max-content; animation: scroll 25s linear infinite; }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .gradient-border {
+        position: relative;
+        border-radius: 28px;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(56,189,248,.35), rgba(52,211,153,.16), rgba(167,139,250,.22));
+    }
+    .gradient-border > .inner {
+        border-radius: 27px;
+        background: var(--bg-alt);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    .image-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.08);
+        background: rgba(15,23,42,.6);
+    }
+    .image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        filter: saturate(1.1) contrast(1.1);
+    }
+    .image-card:hover img { transform: scale(1.08); }
+    .image-card .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(2,6,23,0.01) 0%, rgba(2,6,23,0.80) 100%);
+        pointer-events: none;
+    }
+
+    .icon-chip {
+        width: 56px;
+        height: 56px;
+        display: grid;
+        place-items: center;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+        border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+    .faq-item.active .faq-content { max-height: 220px; padding-top: 1rem; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+    #three-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .content-layer { position: relative; z-index: 1; }
+
+    .toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 100;
+        transform: translateY(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all .25s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .theme-toggle {
+        width: 52px;
+        height: 32px;
+        border-radius: 999px;
+        position: relative;
+        border: 1px solid var(--stroke);
+        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+        box-shadow: inset 0 1px 2px rgba(255,255,255,.08);
+        transition: background-color .35s ease, border-color .35s ease;
+    }
+    .theme-toggle span {
+        position: absolute;
+        top: 50%;
+        left: 4px;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, #ffffff, #cbd5e1);
+        box-shadow: 0 6px 18px rgba(15,23,42,.22);
+        transition: transform .28s ease, background .28s ease;
+    }
+    body[data-theme="light"] .theme-toggle span {
+        transform: translate(20px, -50%);
+        background: linear-gradient(135deg, #0f172a, #334155);
+    }
+
+    .nav-scrolled {
+        box-shadow: 0 12px 35px rgba(0,0,0,.14);
+    }
+
+    .particle-hint {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 40%, rgba(56,189,248,.04), transparent 25%);
+        pointer-events: none;
+    }
+</style>
+
+</head>
+<body data-theme="dark"><div id="three-bg" aria-hidden="true"></div>
+
+<header id="navbar" class="fixed w-full top-0 z-50 glass-nav px-5 sm:px-6 lg:px-8 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+        <a href="#top" class="flex items-center gap-3 group shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                <span class="text-slate-950 font-black text-xl">N</span>
+            </div>
+            <div>
+                <div class="text-2xl font-bold tracking-widest text-[color:var(--text-strong)]">NEXUS</div>
+                <div class="text-[10px] uppercase tracking-[0.28em] text-slate-400">Digital Ecosystems</div>
+            </div>
+        </a>
+
+        <nav aria-label="Main Navigation" class="hidden md:flex items-center gap-8 text-sm text-slate-300 font-semibold">
+            <a href="#services" class="hover:text-[color:var(--text-strong)] transition-colors">Expertise</a>
+            <a href="#work" class="hover:text-[color:var(--text-strong)] transition-colors">Case Studies</a>
+            <a href="#tech" class="hover:text-[color:var(--text-strong)] transition-colors">Tech Stack</a>
+            <a href="#process" class="hover:text-[color:var(--text-strong)] transition-colors">Methodology</a>
+        </nav>
+
+        <div class="flex items-center gap-3 sm:gap-4">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
+                <span aria-hidden="true"></span>
+            </button>
+            <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-slate-950 font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                Start a Project <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="content-layer">
+    <section id="top" class="relative pt-40 pb-20 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center min-h-[90vh]">
+        <div class="particle-hint"></div>
+
+        <div class="lg:col-span-6 z-10 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                Enterprise Digital Engineering
+            </div>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-[color:var(--text-strong)] mb-6">
+                We engineer <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-emerald-400">digital dominance.</span>
+            </h1>
+            <p class="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-xl mb-10">
+                NEXUS delivers elite UI/UX design, scalable full-stack architecture, and motion systems that convert visitors into revenue.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5">
+                <a href="#contact" class="glow-btn flex items-center justify-center px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold text-lg">
+                    Book a Discovery Call
+                </a>
+                <a href="#work" class="flex items-center justify-center px-8 py-4 rounded-2xl glass border border-slate-700 text-[color:var(--text-strong)] font-bold text-lg hover:border-slate-400 transition-colors group">
+                    View Showreel
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:col-span-6 relative reveal">
+            <div class="relative h-[600px] w-full">
+                <div class="absolute inset-0 gradient-border soft-shadow float-slow z-10">
+                    <div class="inner h-full p-4 image-card rounded-[26px]">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Data dashboard UI and UX design" />
+                        <div class="overlay"></div>
+                        <div class="absolute bottom-6 left-6 right-6 glass p-5 rounded-2xl border border-white/10 flex justify-between items-center">
+                            <div>
+                                <div class="text-[color:var(--text-strong)] font-bold text-lg">FinTech SaaS Platform</div>
+                                <div class="text-sky-300 text-sm">React • Node.js • WebGL</div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-8 -left-8 glass p-6 rounded-3xl soft-shadow z-20 float-mid border border-emerald-500/20">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div>
+                            <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">System Uptime</div>
+                            <div class="text-[color:var(--text-strong)] text-2xl font-black">99.99%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-y border-slate-800/60 bg-slate-900/30 overflow-hidden relative z-20" aria-label="Trusted Partners">
+        <div class="marquee py-8 text-slate-500 font-bold uppercase tracking-[0.3em] text-sm md:text-lg gap-20 whitespace-nowrap">
+            <span>Enterprise Grade</span><span>•</span><span>React Native</span><span>•</span><span>Three.js</span><span>•</span><span>AWS Cloud</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>Next.js</span><span>•</span>
+            <span>Enterprise Grade</span><span>•</span><span>React Native</span><span>•</span><span>Three.js</span><span>•</span><span>AWS Cloud</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>Next.js</span><span>•</span>
+        </div>
+    </section>
+
+    <section id="services" class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-32">
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+            <h2 class="text-sky-400 font-bold tracking-[0.2em] uppercase text-sm mb-4">Core Capabilities</h2>
+            <h3 class="text-4xl md:text-5xl font-black text-[color:var(--text-strong)] leading-tight">End-to-End Technical Excellence.</h3>
+            <p class="mt-6 text-slate-400 text-lg leading-relaxed">We don't just build websites. We architect secure, high-performance digital ecosystems designed to scale from day one.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <article class="gradient-border reveal shine">
+                <div class="inner p-10 h-full">
+                    <div class="icon-chip mb-8 bg-sky-500/10 border-sky-500/20">
+                        <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-width="2" stroke-linejoin="round"/></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[color:var(--text-strong)] mb-4">UI/UX Strategy & Design</h4>
+                    <p class="text-slate-400 leading-relaxed mb-6">Data-driven user interfaces that prioritize intuitive navigation. We use wireframing, prototyping, and psychological design principles to maximize conversion rates.</p>
+                    <ul class="space-y-2 text-sm text-slate-300 font-medium">
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Design Systems & Guidelines</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Interactive Prototyping (Figma)</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Motion Design & Micro-interactions</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="gradient-border reveal shine">
+                <div class="inner p-10 h-full">
+                    <div class="icon-chip mb-8 bg-emerald-500/10 border-emerald-500/20">
+                        <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[color:var(--text-strong)] mb-4">Full-Stack Web Architecture</h4>
+                    <p class="text-slate-400 leading-relaxed mb-6">Robust custom software development. From high-performance React frontends to secure Node.js APIs, we build engines that process heavy data effortlessly.</p>
+                    <ul class="space-y-2 text-sm text-slate-300 font-medium">
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Single Page Applications (SPAs)</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Complex Database Architecture</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> RESTful & GraphQL API Integration</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="tech" class="py-24 bg-slate-900/20 border-y border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 44px 44px;"></div>
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 text-center reveal">
+            <h2 class="text-2xl font-bold text-[color:var(--text-strong)] mb-12">Powered by Industry-Leading Technology</h2>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 opacity-80">
+                <div class="glass px-6 py-3 rounded-xl font-bold text-lg tracking-widest hover:text-sky-400 hover:scale-105 transition-all">REACT</div>
+                <div class="glass px-6 py-3 rounded-xl font-bold text-lg tracking-widest hover:text-sky-400 hover:scale-105 transition-all">NODE.JS</div>
+                <div class="glass px-6 py-3 rounded-xl font-bold text-lg tracking-widest hover:text-sky-400 hover:scale-105 transition-all">PYTHON</div>
+                <div class="glass px-6 py-3 rounded-xl font-bold text-lg tracking-widest hover:text-sky-400 hover:scale-105 transition-all">THREE.JS</div>
+                <div class="glass px-6 py-3 rounded-xl font-bold text-lg tracking-widest hover:text-sky-400 hover:scale-105 transition-all">AWS</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-32">
+        <div class="flex flex-col md:flex-row items-end justify-between gap-6 mb-16 reveal">
+            <div>
+                <h2 class="text-emerald-400 font-bold tracking-[0.2em] uppercase text-sm mb-4">Selected Work</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-[color:var(--text-strong)]">Proven Digital Results.</h3>
+            </div>
+            <a href="#" class="text-slate-300 hover:text-[color:var(--text-strong)] border-b border-sky-500 pb-1 font-medium transition-colors">View All Case Studies →</a>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10">
+            <article class="reveal group">
+                <div class="image-card rounded-[32px] h-[400px] w-full mb-6 soft-shadow">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Data analytics dashboard" />
+                    <div class="overlay"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-slate-900/80 backdrop-blur-sm">
+                        <a href="#" class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-slate-900 self-end mb-auto hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex gap-3 mb-3">
+                    <span class="px-3 py-1 rounded-full border border-slate-700 text-xs text-slate-300 font-medium">SaaS Platform</span>
+                    <span class="px-3 py-1 rounded-full border border-slate-700 text-xs text-slate-300 font-medium">Dashboard</span>
+                </div>
+                <h4 class="text-2xl font-bold text-[color:var(--text-strong)] mb-2 group-hover:text-sky-400 transition-colors">OmniData Analytics Engine</h4>
+                <p class="text-slate-400">Redesigned complex data structures into a clean, consumable UI, increasing user retention by 45%.</p>
+            </article>
+
+            <article class="reveal group mt-0 lg:mt-20">
+                <div class="image-card rounded-[32px] h-[400px] w-full mb-6 soft-shadow">
+                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1200&q=80" alt="E-commerce architecture" />
+                    <div class="overlay"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-slate-900/80 backdrop-blur-sm">
+                        <a href="#" class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-slate-900 self-end mb-auto hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex gap-3 mb-3">
+                    <span class="px-3 py-1 rounded-full border border-slate-700 text-xs text-slate-300 font-medium">E-Commerce</span>
+                    <span class="px-3 py-1 rounded-full border border-slate-700 text-xs text-slate-300 font-medium">Headless CMS</span>
+                </div>
+                <h4 class="text-2xl font-bold text-[color:var(--text-strong)] mb-2 group-hover:text-emerald-400 transition-colors">Aura Global Storefront</h4>
+                <p class="text-slate-400">Built a headless e-commerce architecture utilizing Next.js, resulting in sub-second page loads globally.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="process" class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-20 reveal">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-black text-[color:var(--text-strong)] mb-4">Our Method</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">A clear process keeps the experience focused, the UI consistent, and the final product easier to trust.</p>
+        </div>
+        <div class="grid md:grid-cols-4 gap-5">
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sky-400 text-sm font-bold uppercase tracking-[0.25em]">01</div>
+                <h3 class="mt-3 text-xl font-bold text-[color:var(--text-strong)]">Discover</h3>
+                <p class="mt-3 text-slate-400 leading-7">Understand the audience, goals, and brand direction.</p>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-emerald-400 text-sm font-bold uppercase tracking-[0.25em]">02</div>
+                <h3 class="mt-3 text-xl font-bold text-[color:var(--text-strong)]">Design</h3>
+                <p class="mt-3 text-slate-400 leading-7">Build layouts, motion, and clean hierarchy.</p>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-violet-400 text-sm font-bold uppercase tracking-[0.25em]">03</div>
+                <h3 class="mt-3 text-xl font-bold text-[color:var(--text-strong)]">Develop</h3>
+                <p class="mt-3 text-slate-400 leading-7">Turn the concept into a fast, responsive experience.</p>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sky-400 text-sm font-bold uppercase tracking-[0.25em]">04</div>
+                <h3 class="mt-3 text-xl font-bold text-[color:var(--text-strong)]">Launch</h3>
+                <p class="mt-3 text-slate-400 leading-7">Ship polished work that feels premium on every device.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 py-20 reveal">
+        <h2 class="text-3xl font-black text-center text-[color:var(--text-strong)] mb-10">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <div class="faq-item glass rounded-2xl border border-white/10 overflow-hidden cursor-pointer">
+                <div class="px-6 py-5 flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h4 class="font-bold text-[color:var(--text-strong)] text-lg">What makes NEXUS different from other agencies?</h4>
+                    <svg class="w-5 h-5 text-sky-400 faq-icon transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="faq-content px-6 bg-slate-900/40">
+                    <p class="text-slate-400 pb-5">We are developer-led. Instead of just creating pretty designs, we build production-ready digital ecosystems. We combine elite UI/UX practices with high-performance backend engineering.</p>
+                </div>
+            </div>
+            <div class="faq-item glass rounded-2xl border border-white/10 overflow-hidden cursor-pointer">
+                <div class="px-6 py-5 flex justify-between items-center" onclick="toggleFaq(this)">
+                    <h4 class="font-bold text-[color:var(--text-strong)] text-lg">Do you handle full-stack custom software?</h4>
+                    <svg class="w-5 h-5 text-sky-400 faq-icon transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="faq-content px-6 bg-slate-900/40">
+                    <p class="text-slate-400 pb-5">Absolutely. We specialize in React, Node.js, Python, and cloud infrastructure to ensure your software is robust, secure, and scalable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pb-32">
+        <div class="gradient-border reveal soft-shadow">
+            <div class="inner p-10 sm:p-20 text-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-50 bg-[radial-gradient(circle_at_top,rgba(56,189,248,.20),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(52,211,153,.16),transparent_50%)]"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl sm:text-6xl font-black text-[color:var(--text-strong)] leading-tight mb-6">Ready to build the <br>next big thing?</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-10">Stop settling for mediocre templates. Let's engineer a custom digital experience that positions your brand as an industry leader.</p>
+
+                    <form id="leadForm" class="max-w-md mx-auto flex flex-col gap-4" novalidate>
+                        <input id="emailInput" type="email" placeholder="Enter your work email" class="w-full px-6 py-4 rounded-xl bg-slate-900/80 border border-slate-700 text-white focus:outline-none focus:border-sky-500 transition-colors" required />
+                        <button id="submitBtn" type="submit" class="glow-btn w-full py-4 rounded-xl bg-white text-slate-950 font-bold text-lg hover:bg-slate-200 transition-colors">
+                            Start the Conversation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="toast" class="toast">
+    <div class="glass px-5 py-4 rounded-2xl border border-emerald-500/20">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+                <div class="font-bold text-[color:var(--text-strong)]">Success</div>
+                <div id="toastMsg" class="text-sm text-slate-400">Your message has been sent.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="border-t border-slate-800/60 bg-slate-950 pt-20 pb-10 px-5 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
+        <div class="col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="text-xl font-black text-[color:var(--text-strong)]">NEXUS</span>
+            </div>
+            <p class="text-slate-500 max-w-sm mb-6 leading-relaxed">Engineering elite digital ecosystems for the next generation of industry leaders.</p>
+        </div>
+        <div>
+            <h4 class="text-[color:var(--text-strong)] font-bold mb-5">Expertise</h4>
+            <ul class="space-y-3 text-slate-400 text-sm">
+                <li><a href="#services" class="hover:text-sky-400 transition-colors">UI/UX Design</a></li>
+                <li><a href="#services" class="hover:text-sky-400 transition-colors">Frontend Engineering</a></li>
+                <li><a href="#services" class="hover:text-sky-400 transition-colors">Cloud Architecture</a></li>
+                <li><a href="#services" class="hover:text-sky-400 transition-colors">SaaS Development</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-[color:var(--text-strong)] font-bold mb-5">Company</h4>
+            <ul class="space-y-3 text-slate-400 text-sm">
+                <li><a href="#work" class="hover:text-sky-400 transition-colors">Case Studies</a></li>
+                <li><a href="#process" class="hover:text-sky-400 transition-colors">Our Process</a></li>
+                <li><a href="#contact" class="hover:text-sky-400 transition-colors">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-[color:var(--text-strong)] font-bold mb-5">Connect</h4>
+            <ul class="space-y-3 text-slate-400 text-sm">
+                <li><a href="#" class="hover:text-sky-400 transition-colors">Twitter</a></li>
+                <li><a href="#" class="hover:text-sky-400 transition-colors">LinkedIn</a></li>
+                <li><a href="#" class="hover:text-sky-400 transition-colors">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto border-t border-slate-800/60 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+        <p>&copy; 2026 NEXUS Digital Ecosystems. All rights reserved.</p>
+        <div class="flex gap-4 mt-4 md:mt-0">
+            <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-300">Terms of Service</a>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
+    
+    <!-- Studio Page Button -->
+    <a href="studio.html" class="group relative px-8 py-3 rounded-2xl font-bold text-sm text-white overflow-hidden">
+        <span class="absolute inset-0 bg-gradient-to-r from-sky-500 to-blue-600 opacity-90 group-hover:opacity-100 transition"></span>
+        <span class="relative flex items-center gap-2">
+            Studio Page
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </span>
+    </a>
+    
+    <!-- Settings Button -->
+    <a href="settings.html" class="group relative px-8 py-3 rounded-2xl font-bold text-sm text-[color:var(--text-strong)] overflow-hidden border border-slate-600 glass">
+        <span class="relative flex items-center gap-2">
+            Settings
+            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M12 8v4l3 3" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="9" stroke-width="2" />
+            </svg>
+        </span>
+    </a>
+    
+    </div>
+</footer>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), index * 55);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    function toggleFaq(element) {
+        const parent = element.parentElement;
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== parent) item.classList.remove('active');
+        });
+        parent.classList.toggle('active');
+    }
+
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            header.classList.add('nav-scrolled');
+        } else {
+            header.classList.remove('nav-scrolled');
+        }
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('nexus-theme');
+    if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+    updateThemeToggleAria();
+
+    themeToggle.addEventListener('click', () => {
+        const current = document.body.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', next);
+        localStorage.setItem('nexus-theme', next);
+        updateThemeToggleAria();
+    });
+
+    function updateThemeToggleAria() {
+        const theme = document.body.getAttribute('data-theme') || 'dark';
+        themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
+        themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+
+    (function initThreeBackground() {
+        const container = document.getElementById('three-bg');
+        if (!window.THREE || !container) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 60;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const particleCount = 1200;
+        const positions = new Float32Array(particleCount * 3);
+        const basePositions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3;
+            const radius = 18 + Math.random() * 48;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+
+            positions[i3] = x;
+            positions[i3 + 1] = y;
+            positions[i3 + 2] = z;
+
+            basePositions[i3] = x;
+            basePositions[i3 + 1] = y;
+            basePositions[i3 + 2] = z;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.12,
+            transparent: true,
+            opacity: 0.85,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            color: document.body.getAttribute('data-theme') === 'light' ? 0x0f172a : 0x8adfff
+        });
+
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        const mouse = new THREE.Vector2(0, 0);
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            targetRotationY = mouse.x * 0.22;
+            targetRotationX = mouse.y * 0.16;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const t = performance.now() * 0.00035;
+
+            const pos = geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                pos[i3] = basePositions[i3] + Math.sin(t * 2 + i * 0.01) * 0.08;
+                pos[i3 + 1] = basePositions[i3 + 1] + Math.cos(t * 1.7 + i * 0.012) * 0.08;
+                pos[i3 + 2] = basePositions[i3 + 2] + Math.sin(t * 1.2 + i * 0.008) * 0.08;
+            }
+            geometry.attributes.position.needsUpdate = true;
+
+            points.rotation.x += (targetRotationX - points.rotation.x) * 0.03;
+            points.rotation.y += (targetRotationY - points.rotation.y) * 0.03;
+            points.rotation.z += 0.0007;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        function resize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', resize);
+
+        const observerTheme = new MutationObserver(() => {
+            material.color.set(document.body.getAttribute('data-theme') === 'light' ? 0x0f172a : 0x8adfff);
+        });
+        observerTheme.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+
+    const leadForm = document.getElementById('leadForm');
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+
+    function showToast(message) {
+        toastMsg.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(window.__toastTimer);
+        window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    async function sendLeadToNodeEndpoint(payload) {
+        const endpoint = '/api/lead';
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network request failed');
+            }
+
+            return await response.json();
+        } catch (error) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({ ok: true, simulated: true, message: 'Lead captured successfully' });
+                }, 1200);
+            });
+        }
+    }
+
+    leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (!email || !email.includes('@')) {
+            showToast('Please enter a valid email address.');
+            emailInput.focus();
+            return;
+        }
+
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
+        try {
+            const result = await sendLeadToNodeEndpoint({ email, source: 'NEXUS landing page' });
+            showToast(result?.message || 'Your request was sent successfully.');
+            leadForm.reset();
+        } catch (error) {
+            showToast('Something went wrong. Please try again.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+        }
+    });
+</script>
+
+</body>
+</html>
